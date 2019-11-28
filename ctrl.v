@@ -1,7 +1,7 @@
 `include "defs.v"
 
 
-module ctrl (
+module CTRL (
     input wire [6:0]    read,
     output reg          branch,
     output reg          alusrc, 
