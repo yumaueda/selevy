@@ -31,3 +31,6 @@
 
 
 `define ROM_COL_MAX   1024
+
+
+`define DUMPFILE "selevy.vcd"

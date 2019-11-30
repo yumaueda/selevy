@@ -1,0 +1,203 @@
+$date
+	Sat Nov 30 16:35:33 2019
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module selevytest $end
+$var reg 1 ! CLK $end
+$var reg 1 " reset $end
+$var integer 32 # i [31:0] $end
+$scope module s $end
+$var wire 1 ! CLK $end
+$var wire 1 " reset $end
+$var wire 1 $ rf_regwrite $end
+$var wire 32 % signextnr_out [31:0] $end
+$var wire 32 & rom_out [31:0] $end
+$var wire 32 ' rf_out2 [31:0] $end
+$var wire 32 ( rf_out1 [31:0] $end
+$var wire 32 ) ram_read_data [31:0] $end
+$var wire 32 * pc_out [31:0] $end
+$var wire 32 + incpc_out [31:0] $end
+$var wire 1 , ctrl_regwrite $end
+$var wire 1 - ctrl_memwrite $end
+$var wire 1 . ctrl_memread $end
+$var wire 1 / ctrl_load $end
+$var wire 2 0 ctrl_extnrops [1:0] $end
+$var wire 1 1 ctrl_branch $end
+$var wire 1 2 ctrl_alusrc $end
+$var wire 2 3 ctrl_aluops [1:0] $end
+$var wire 32 4 br_tgt_target [31:0] $end
+$var wire 2 5 aluctrl_out [1:0] $end
+$var wire 1 6 alu_zero $end
+$var wire 32 7 alu_out [31:0] $end
+$var reg 32 8 alu_read2 [31:0] $end
+$var reg 32 9 pc_addr [31:0] $end
+$var reg 32 : rf_write_data [31:0] $end
+$scope module alu $end
+$var wire 32 ; read2 [31:0] $end
+$var wire 1 6 zero $end
+$var wire 32 < read1 [31:0] $end
+$var wire 2 = ops [1:0] $end
+$var reg 32 > out [31:0] $end
+$upscope $end
+$scope module aluctrl $end
+$var wire 3 ? funct [2:0] $end
+$var wire 1 @ thirty $end
+$var wire 2 A ops [1:0] $end
+$var reg 2 B out [1:0] $end
+$upscope $end
+$scope module br_tgt $end
+$var wire 32 C addr2 [31:0] $end
+$var wire 32 D addr1 [31:0] $end
+$var reg 32 E target [31:0] $end
+$upscope $end
+$scope module ctrl $end
+$var wire 7 F read [6:0] $end
+$var reg 2 G aluops [1:0] $end
+$var reg 1 2 alusrc $end
+$var reg 1 1 branch $end
+$var reg 2 H extnrops [1:0] $end
+$var reg 1 / load $end
+$var reg 1 . memread $end
+$var reg 1 - memwrite $end
+$var reg 1 , regwrite $end
+$upscope $end
+$scope module incpc $end
+$var wire 32 I addr [31:0] $end
+$var reg 32 J out [31:0] $end
+$upscope $end
+$scope module pc $end
+$var wire 1 ! CLK $end
+$var wire 32 K addr [31:0] $end
+$var wire 1 " reset $end
+$var reg 32 L out [31:0] $end
+$upscope $end
+$scope module ram $end
+$var wire 1 ! CLK $end
+$var wire 32 M addr [31:0] $end
+$var wire 1 . memread $end
+$var wire 1 - memwrite $end
+$var wire 1 " reset $end
+$var wire 32 N write_data [31:0] $end
+$var reg 32 O read_data [31:0] $end
+$scope begin rst $end
+$var integer 32 P i [31:0] $end
+$upscope $end
+$upscope $end
+$scope module regfile $end
+$var wire 1 ! CLK $end
+$var wire 32 Q out1 [31:0] $end
+$var wire 32 R out2 [31:0] $end
+$var wire 5 S read1 [4:0] $end
+$var wire 5 T read2 [4:0] $end
+$var wire 1 $ regwrite $end
+$var wire 1 " reset $end
+$var wire 5 U write1 [4:0] $end
+$var wire 32 V write_data [31:0] $end
+$scope begin rst $end
+$var integer 32 W i [31:0] $end
+$upscope $end
+$upscope $end
+$scope module rom $end
+$var wire 1 ! CLK $end
+$var wire 32 X read_addr [31:0] $end
+$var wire 1 " reset $end
+$var reg 32 Y out [31:0] $end
+$scope begin rst $end
+$var integer 32 Z i [31:0] $end
+$scope begin zero $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module signextnr $end
+$var wire 2 [ ops [1:0] $end
+$var wire 32 \ read [31:0] $end
+$var reg 32 ] out [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx ]
+bx \
+bx [
+bx Z
+bx Y
+bx X
+bx W
+bx V
+bx U
+bx T
+bx S
+bx R
+bx Q
+bx P
+bx O
+bx N
+bx M
+bx L
+bx K
+bx J
+bx I
+bx H
+bx G
+bx F
+bx E
+bx D
+bx C
+bx B
+bx A
+x@
+bx ?
+bx >
+bx =
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+bx 7
+x6
+bx 5
+bx 4
+bx 3
+x2
+x1
+bx 0
+x/
+x.
+x-
+x,
+bx +
+bx *
+bx )
+bx (
+bx '
+bx &
+bx %
+z$
+bx #
+0"
+x!
+$end
+#1
+b100 +
+b100 J
+b0 *
+b0 D
+b0 I
+b0 L
+b0 X
+b10000000000 P
+b100000 W
+b10000000000 Z
+1"
+#2
+b100000 #
+0"
+#3

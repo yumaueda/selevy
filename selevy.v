@@ -1,6 +1,11 @@
-module selevy (
-        input wire CLK, reset
+module selevy #(
+    parameter rf_init_data_path = 0,
+    parameter rom_init_data_path = 0
+    )(
+    input wire CLK, reset
     );
+
+
     reg [31:0] pc_addr;
     wire [31:0] pc_out;
     wire [31:0] incpc_out;
@@ -9,7 +14,8 @@ module selevy (
     PC pc(
         pc_addr,
         pc_out,
-        CLK
+        CLK,
+        reset
     );
     INCPC incpc(
         pc_out,
@@ -26,7 +32,8 @@ module selevy (
     ROM rom(
         pc_out,
         rom_out,
-        CLK
+        CLK,
+        reset
     );
 
 
@@ -39,8 +46,10 @@ module selevy (
        rf_regwrite,
        rf_out1,
        rf_out2,
-       CLK
+       CLK,
+       reset
     );
+    defparam regfile.init_data_path = rf_init_data_path;
 
 
     wire ctrl_branch, ctrl_alusrc, ctrl_load;
@@ -91,7 +100,8 @@ module selevy (
         alu_out, rf_out2,
         ctrl_memread, ctrl_memwrite,
         ram_read_data,
-        CLK
+        CLK,
+        reset
     );
 
 

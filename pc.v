@@ -4,11 +4,16 @@
 module PC (
     input wire [`WORDSIZE-1:0] addr,
     output reg [`WORDSIZE-1:0] out,
-    input wire CLK
+    input wire CLK,
+    input wire reset
     );
 
     always @(posedge CLK) begin
         out <= addr;
+    end
+
+    always @(posedge reset) begin
+        out <= 0;
     end
 endmodule
 
