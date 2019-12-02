@@ -20,22 +20,18 @@ endmodule
 
 module INCPC (
     input wire [`WORDSIZE-1:0] addr,
-    output reg [`WORDSIZE-1:0] out
+    output wire [`WORDSIZE-1:0] out
     );
 
-    always @(addr) begin
-        out <= addr + (`WORDSIZE / 8);
-    end
+    assign out = addr + 1;
 endmodule
 
 
 module BR_TGT (
     input wire [`WORDSIZE-1:0] addr1,
     input wire [`WORDSIZE-1:0] addr2,
-    output reg [`WORDSIZE-1:0] target
+    output wire [`WORDSIZE-1:0] target
     );
 
-    always @(addr1, addr2) begin
-        target <= addr1 + addr2;
-    end
+    assign target = addr1 + addr2;
 endmodule

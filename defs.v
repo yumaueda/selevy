@@ -30,7 +30,7 @@
 `define R_OR          3'b110
 
 
-`define ROM_COL_MAX   1024
+`define ROM_COL_MAX   64
 
 
 `define DUMPFILE "selevy.vcd"
