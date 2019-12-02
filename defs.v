@@ -30,6 +30,7 @@
 `define R_OR          3'b110
 
 
+`define REG_NUM       32
 `define ROM_COL_MAX   64
 
 

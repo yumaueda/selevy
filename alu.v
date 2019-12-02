@@ -49,6 +49,10 @@ module ALUCTRL (
                             2'b1:
                                 out <= `ALU_SUB;
                         endcase
+                    `R_AND:
+                        out <= `ALU_AND;
+                    `R_OR:
+                        out <= `ALU_OR;
                 endcase
         endcase
     end

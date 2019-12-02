@@ -2,7 +2,7 @@
 
 
 module selevytest;
-    parameter CYC = 1;
+    parameter CYC = 2;
     reg CLK, reset;
 
     selevy s(
@@ -16,23 +16,25 @@ module selevytest;
     initial begin
         $dumpfile(`DUMPFILE);
         $dumpvars(0, selevytest);
-        $monitor("%t: %b", $time, s.regfile.rf[1]);
+        $monitor("%t: ra=%b, rb=%b",
+            $time,
+            s.regfile.rf[1],
+            s.regfile.rf[2]);
                 CLK = 0; reset = 0;
-        #(CYC)  reset = 1;
-        #(CYC)  reset = 0;
+        repeat (2) begin
+            #(CYC/2)  reset = ~reset;
+        end
         $display("REGISTERES");
-        for (i = 0; i < 32; i++) begin
+        for (i = 0; i < `REG_NUM; i++) begin
             $display("%d: %b", i, s.regfile.rf[i]);
         end
         $display("ROM");
-        for (i = 0; i < 2; i++) begin
+        for (i = 0; i < `ROM_COL_MAX; i++) begin
             $display("%d: %b", i, s.rom.rom[i]);
         end
-        #(CYC)  CLK = 1;
-        #(CYC)  CLK = 0;
-        #(CYC)  CLK = 1;
-        #(CYC)  CLK = 0;
-        #(CYC)  $finish;
-
+        repeat (4*2) begin
+            #(CYC/2)  CLK = ~CLK;
+        end
+        #(CYC/2)  $finish;
     end
 endmodule

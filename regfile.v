@@ -13,7 +13,7 @@ module REGFILE #(
     input wire reset
     );
 
-    reg [`WORDSIZE-1:0] rf [`WORDSIZE-1:0];
+    reg [`WORDSIZE-1:0] rf [`REG_NUM-1:0];
 
     assign out1 = rf[read1];
     assign out2 = rf[read2];
