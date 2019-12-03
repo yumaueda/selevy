@@ -9,13 +9,11 @@ module RAM (
     input wire reset
     );
 
-    reg [`WORDSIZE-1:0] ram [`ROM_COL_MAX-1:0];
+    reg [7:0] ram [`ROM_COL_MAX-1:0];
 
     always @(posedge CLK) begin
-        if (memread)
-            read_data <= ram[addr];
         if (memwrite)
-            ram[addr] <= write_data;
+            store_word(write_data);
     end
 
     always @(posedge reset) begin : rst
@@ -24,4 +22,39 @@ module RAM (
             ram[i] = 0;
         end
     end
+
+    always @(addr) begin
+        if (memread)
+            read_data <= get_read_data(addr);
+    end
+
+    function [31:0] get_read_data;
+    input [31:0] in;
+    begin : append3bytes
+        get_read_data[31:24] = ram[in];
+        get_read_data[23:16] = ram[in+1];
+        get_read_data[15: 8] = ram[in+2];
+        get_read_data[ 7: 0] = ram[in+3];
+    end
+    endfunction
+
+    /*
+     * Needs a controll signal for
+     * knowing how many bytes it takes up in RAM.
+     */
+
+    /*
+     * task do_store;
+     * endtask
+     */
+
+    task store_word;
+    input [`WORDSIZE-1:0] in;
+    begin
+        ram[addr]   = write_data[31:24];
+        ram[addr+1] = write_data[23:16];
+        ram[addr+2] = write_data[15: 8];
+        ram[addr+3] = write_data[ 7: 0];
+    end
+    endtask
 endmodule

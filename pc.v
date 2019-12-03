@@ -23,7 +23,7 @@ module INCPC (
     output wire [`WORDSIZE-1:0] out
     );
 
-    assign out = addr + 1;
+    assign out = addr + 4;
 endmodule
 
 

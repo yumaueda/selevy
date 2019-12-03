@@ -4,6 +4,7 @@
 module ROM #(
     parameter init_data_path = 0
     )(
+    /* `read_addr` must be multiple of 4 */
     input wire [31:0] read_addr,
     output wire [31:0] out,
     input wire reset
@@ -11,7 +12,7 @@ module ROM #(
 
     reg [`WORDSIZE-1:0] rom [`ROM_COL_MAX-1:0];
 
-    assign out = rom[read_addr];
+    assign out = rom[read_addr/4];
 
     always @(posedge reset) begin : rst
         integer i;

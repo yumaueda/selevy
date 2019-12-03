@@ -22,11 +22,13 @@ module SIGNEXTNR (
             `EXTNR_S: begin
                 signextend[10:5] = in[`WORDSIZE-2:`WORDSIZE-7];
                 signextend[4:0] = in[11:7];
-            end
-            `EXTNR_I:
+            end 
+            `EXTNR_I: begin
                 signextend[10:0] = in[`WORDSIZE-2:`WORDSIZE-12];
-            `EXTNR_R:
+            end 
+            `EXTNR_R: begin
                 signextend = 0;
+            end
         endcase
     end
     endfunction

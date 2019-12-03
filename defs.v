@@ -13,10 +13,10 @@
 `define EXTNR_R       2'b11
 
 
-`define OPCODE_B      7'b1100011
 `define OPCODE_I      7'b0000011
-`define OPCODE_R      7'b0110011
 `define OPCODE_S      7'b0100011
+`define OPCODE_R      7'b0110011
+`define OPCODE_B      7'b1100011
 
 
 `define OPCODE_B_ALU  2'b00
@@ -31,7 +31,7 @@
 
 
 `define REG_NUM       32
-`define ROM_COL_MAX   64
+`define ROM_COL_MAX   32
 
 
 `define DUMPFILE "selevy.vcd"

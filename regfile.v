@@ -17,7 +17,7 @@ module REGFILE #(
 
     assign out1 = rf[read1];
     assign out2 = rf[read2];
-    
+
     always @(posedge CLK) begin
         if (regwrite)
             rf[write1] <= write_data;
