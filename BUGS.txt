@@ -1,3 +1,0 @@
-Bugs in the Selevy core to be squashed.
-
-- LW instruction cannot load from the data memory when there's not a change from last value in alu_out.
