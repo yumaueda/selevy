@@ -16,11 +16,14 @@ module selevytest;
     initial begin
         $dumpfile(`DUMPFILE);
         $dumpvars(0, selevytest);
-        $monitor("%t: x0=%b, x1=%b, x2=%b, ram[3]=%b",
+        $monitor("%t:\nx0=%b\nx1=%b\nx2=%b\nram[0]=%b\nram[1]=%b\nram[2]=%b\nram[3]=%b\n",
             $time,
             s.regfile.rf[0],
             s.regfile.rf[1],
             s.regfile.rf[2],
+            s.ram.ram[0],
+            s.ram.ram[1],
+            s.ram.ram[2],
             s.ram.ram[3]
             );
                 CLK = 0; reset = 0;
@@ -35,7 +38,7 @@ module selevytest;
         for (i = 0; i < `ROM_COL_MAX; i++) begin
             $display("%d: %b", i*4, s.rom.rom[i]);
         end
-        repeat (8*2) begin
+        repeat (11*2) begin
             #(CYC/2)  CLK = ~CLK;
         end
         #(CYC/2)  $finish;

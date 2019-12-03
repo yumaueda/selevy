@@ -25,6 +25,10 @@ module ALU (
 endmodule
 
 
+/*
+ * The first and second case statement should be
+ * written in ctrl.v.
+ */
 module ALUCTRL (
     input wire [1:0]    ops,
     input wire [2:0]    funct,

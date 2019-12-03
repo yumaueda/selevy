@@ -57,9 +57,11 @@ module selevy #(
 
     wire ctrl_branch, ctrl_alusrc, ctrl_load;
     wire ctrl_memread, ctrl_memwrite;
+    wire [1:0] ctrl_storeops;
     wire [1:0] ctrl_aluops, ctrl_extnrops;
     CTRL ctrl(
         rom_out[6:0],
+        rom_out[14:12],
         ctrl_branch,
         ctrl_alusrc,
         ctrl_load,
@@ -67,7 +69,8 @@ module selevy #(
         ctrl_extnrops,
         ctrl_memread,
         ctrl_memwrite,
-        rf_regwrite
+        rf_regwrite,
+        ctrl_storeops
     );
 
 
@@ -102,6 +105,7 @@ module selevy #(
     RAM ram (
         alu_out, rf_out2,
         ctrl_memread, ctrl_memwrite,
+        ctrl_storeops,
         ram_read_data,
         CLK,
         reset
