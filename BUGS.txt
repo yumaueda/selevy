@@ -1,0 +1,3 @@
+Bugs in the Selevy core to be squashed.
+
+- LW instruction cannot load from the data memory when specify address zero.

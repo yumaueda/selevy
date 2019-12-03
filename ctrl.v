@@ -23,17 +23,6 @@ module CTRL (
         memwrite <= 0; // sw
         regwrite <= 0; // R, lw
         case (read)
-            `OPCODE_B: begin
-                branch   <= 1;
-                aluops   <= `OPCODE_B_ALU;
-                extnrops <= `EXTNR_B;
-            end
-            `OPCODE_S: begin
-                alusrc   <= 1;
-                aluops   <= `OPCODE_S_ALU;
-                extnrops <= `EXTNR_S;
-                memwrite <= 1;
-            end
             `OPCODE_I: begin
                 alusrc   <= 1;
                 load     <= 1;
@@ -42,10 +31,21 @@ module CTRL (
                 memread  <= 1;
                 regwrite <= 1;
             end
+            `OPCODE_S: begin
+                alusrc   <= 1;
+                aluops   <= `OPCODE_S_ALU;
+                extnrops <= `EXTNR_S;
+                memwrite <= 1;
+            end
             `OPCODE_R: begin
                 aluops   <= `OPCODE_R_ALU;
                 extnrops <= `EXTNR_R;
                 regwrite <= 1;
+            end
+            `OPCODE_B: begin
+                branch   <= 1;
+                aluops   <= `OPCODE_B_ALU;
+                extnrops <= `EXTNR_B;
             end
         endcase
     end
