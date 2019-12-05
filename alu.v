@@ -3,7 +3,7 @@
 
 module ALU (
     input wire [31:0] read1, read2,
-    input wire [1:0] ops,
+    input wire [2:0] ops,
     output reg [31:0] out,
     output wire zero
     );
@@ -12,14 +12,16 @@ module ALU (
 
     always @(read1, read2, ops) begin
         case (ops)
-            2'b00:
+            `ALU_AND:
                 out <= read1 & read2;
-            2'b01:
+            `ALU_OR:
                 out <= read1 | read2;
-            2'b10:
+            `ALU_ADD:
                 out <= read1 + read2;
-            2'b11:
+            `ALU_SUB:
                 out <= read1 - read2;
+            `ALU_XOR:
+                out <= read1 ^ read2;
         endcase
     end
 endmodule
@@ -31,12 +33,12 @@ endmodule
  */
 module ALUCTRL (
     input wire [1:0]    ops,
-    input wire [2:0]    funct,
-    input wire          thirty,
-    output reg [1:0]    out
+    input wire [2:0]    funct3,
+    input wire          funct7_30,
+    output reg [2:0]    out
     );
 
-    always @(ops, funct, thirty) begin
+    always @(ops, funct3, funct7_30) begin
         case (ops)
             `OPCODE_I_ALU:
                 out <= `ALU_ADD;
@@ -45,9 +47,9 @@ module ALUCTRL (
             `OPCODE_B_ALU:
                 out <= `ALU_SUB;
             `OPCODE_R_ALU:
-                case (funct)
+                case (funct3)
                     `R_ADDSUB:
-                        case (thirty)
+                        case (funct7_30)
                             2'b0:
                                 out <= `ALU_ADD; 
                             2'b1:
@@ -57,6 +59,8 @@ module ALUCTRL (
                         out <= `ALU_AND;
                     `R_OR:
                         out <= `ALU_OR;
+                    `R_XOR:
+                        out <= `ALU_XOR;
                 endcase
         endcase
     end

@@ -26,3 +26,4 @@ R
 - SUB
 - OR
 - AND
+- XOR
