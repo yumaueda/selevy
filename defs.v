@@ -1,10 +1,11 @@
 `define WORDSIZE      32
 
 
-`define ALU_AND       2'b00
-`define ALU_OR        2'b01
-`define ALU_ADD       2'b10
-`define ALU_SUB       2'b11
+`define ALU_AND       3'b000
+`define ALU_OR        3'b001
+`define ALU_ADD       3'b010
+`define ALU_SUB       3'b011
+`define ALU_XOR       3'b100
 
 
 `define EXTNR_B       2'b00
@@ -33,6 +34,7 @@
 `define R_ADDSUB      3'b000
 `define R_AND         3'b111
 `define R_OR          3'b110
+`define R_XOR         3'b100
 
 
 `define REG_NUM       32

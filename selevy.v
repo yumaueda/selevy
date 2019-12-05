@@ -81,7 +81,7 @@ module selevy #(
     );
 
 
-    wire [1:0] aluctrl_out;
+    wire [2:0] aluctrl_out;
     ALUCTRL aluctrl (
         ctrl_aluops,
         rom_out[14:12],
