@@ -57,8 +57,8 @@ module selevy #(
 
     wire ctrl_branch, ctrl_alusrc, ctrl_load;
     wire ctrl_memread, ctrl_memwrite;
-    wire [1:0] ctrl_storeops;
-    wire [1:0] ctrl_aluops, ctrl_extnrops;
+    wire [1:0] ctrl_storeops, ctrl_extnrops;
+    wire [2:0] ctrl_aluops;
     CTRL ctrl(
         rom_out[6:0],
         rom_out[14:12],
@@ -81,7 +81,7 @@ module selevy #(
     );
 
 
-    wire [2:0] aluctrl_out;
+    wire [3:0] aluctrl_out;
     ALUCTRL aluctrl (
         ctrl_aluops,
         rom_out[14:12],

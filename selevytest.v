@@ -38,7 +38,7 @@ module selevytest;
         for (i = 0; i < `ROM_COL_MAX; i++) begin
             $display("%d: %b", i*4, s.rom.rom[i]);
         end
-        repeat (11*2) begin
+        repeat (18*2) begin
             #(CYC/2)  CLK = ~CLK;
         end
         #(CYC/2)  $finish;
