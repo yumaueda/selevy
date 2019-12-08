@@ -7,7 +7,7 @@ module CTRL (
     output reg          branch,
     output reg          alusrc, 
     output reg          load,
-    output reg [1:0]    aluops,
+    output reg [2:0]    aluops,
     output reg [1:0]    extnrops,
     output reg          memread,
     output reg          memwrite,
@@ -27,11 +27,17 @@ module CTRL (
         storeops <= 0; // S
         case (read_opcode)
             `OPCODE_I: begin
-                alusrc   <= 1;
-                load     <= 1;
                 aluops   <= `OPCODE_I_ALU;
+                alusrc   <= 1;
                 extnrops <= `EXTNR_I;
+                load     <= 1;
                 memread  <= 1;
+                regwrite <= 1;
+            end
+            `OPCODE_I_I: begin
+                aluops   <= `OPCODE_I_I_ALU;
+                alusrc   <= 1;
+                extnrops <= `EXTNR_I;
                 regwrite <= 1;
             end
             `OPCODE_S: begin
