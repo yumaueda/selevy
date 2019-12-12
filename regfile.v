@@ -25,7 +25,7 @@ module REGFILE #(
 
     always @(posedge reset) begin : rst
         integer i;
-        for (i = 0; i < `WORDSIZE; i++) begin
+        for (i = 0; i < `WORDSIZE; i = i + 1) begin
             rf[i] = 0;
         end
         if (init_data_path) begin

@@ -16,7 +16,7 @@ module ROM #(
 
     always @(posedge reset) begin : rst
         integer i;
-        for (i = 0; i < `ROM_COL_MAX; i++) begin : zero
+        for (i = 0; i < `ROM_COL_MAX; i = i + 1) begin
             rom[i] = 0;
         end
         if (init_data_path) begin

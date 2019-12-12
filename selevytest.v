@@ -31,11 +31,11 @@ module selevytest;
             #(CYC/2)  reset = ~reset;
         end
         $display("REGISTERES");
-        for (i = 0; i < `REG_NUM; i++) begin
+        for (i = 0; i < `REG_NUM; i = i + 1) begin
             $display("%d: %b", i*4, s.regfile.rf[i]);
         end
         $display("ROM");
-        for (i = 0; i < `ROM_COL_MAX; i++) begin
+        for (i = 0; i < `ROM_COL_MAX; i = i + 1) begin
             $display("%d: %b", i*4, s.rom.rom[i]);
         end
         repeat (18*2) begin

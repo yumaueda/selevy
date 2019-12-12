@@ -14,12 +14,12 @@ module RAM (
 
     always @(posedge CLK) begin
         if (memwrite)
-            do_store(write_data);
+            do_store();
     end
 
     always @(posedge reset) begin : rst
         integer i;
-        for (i = 0; i < `ROM_COL_MAX; i++) begin
+        for (i = 0; i < `ROM_COL_MAX; i = i + 1) begin
             ram[i] <= 0;
         end
     end
