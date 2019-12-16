@@ -1,7 +1,6 @@
 `include "defs.v"
 
 
-(* dont_touch = "true" *)
 module REGFILE (
     input wire [4:0] read1, read2, write1,
     input wire [31:0] write_data,
@@ -22,8 +21,6 @@ module REGFILE (
             for (i = 0; i < `WORDSIZE; i = i + 1) begin
                 rf[i] <= 0;
             end
-            // これがだめ、０にリセットしないといけない
-            // $readmemb(`RF_INIT, rf);
         end
         else if (regwrite) begin
             rf[write1] <= write_data;

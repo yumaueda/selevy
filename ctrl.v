@@ -1,7 +1,6 @@
 `include "defs.v"
 
 
-(* dont_touch = "true" *)
 module CTRL (
     input wire [6:0]    read_opcode,
     input wire [2:0]    read_funct,

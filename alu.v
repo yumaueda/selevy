@@ -1,7 +1,6 @@
 `include "defs.v"
 
 
-(* dont_touch = "true" *)
 module ALU (
     input wire [31:0] read1, read2,
     input wire [3:0] ops,
@@ -52,7 +51,6 @@ endmodule
  * The first and second case statement should be
  * written in ctrl.v.
  */
-(* dont_touch = "true" *)
 module ALUCTRL (
     input wire [2:0]    ops,
     input wire [2:0]    funct3,

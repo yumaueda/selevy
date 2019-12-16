@@ -1,7 +1,6 @@
 `include "defs.v"
 
 
-(* dont_touch = "true" *)
 module PC (
     input  wire [`WORDSIZE-1:0] addr,
     output reg  [`WORDSIZE-1:0] out,
@@ -20,7 +19,6 @@ module PC (
 endmodule
 
 
-(* dont_touch = "true" *)
 module INCPC (
     input wire [`WORDSIZE-1:0] addr,
     output wire [`WORDSIZE-1:0] out
@@ -30,7 +28,6 @@ module INCPC (
 endmodule
 
 
-(* dont_touch = "true" *)
 module BR_TGT (
     input wire [`WORDSIZE-1:0] addr1,
     input wire [`WORDSIZE-1:0] addr2,

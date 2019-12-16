@@ -1,7 +1,6 @@
 `include "defs.v"
 
 
-(* dont_touch = "true" *)
 module ROM(
     /* `read_addr` must be multiple of 4 */
     input  wire [31:0] read_addr,
@@ -13,12 +12,10 @@ module ROM(
     assign out = rom[read_addr/4];
 
     initial begin : rst
-        /*
         integer i;
         for (i = 0; i < `ROM_COL_MAX; i = i + 1) begin
             rom[i] = 0;
         end
-        */
         $readmemb(`ROM_INIT, rom);
     end
 endmodule

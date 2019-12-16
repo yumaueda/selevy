@@ -1,7 +1,6 @@
 `include "defs.v"
 
 
-(* dont_touch = "true" *)
 module RAM (
     input wire [31:0] addr, write_data,
     input wire memwrite,

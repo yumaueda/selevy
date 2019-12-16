@@ -1,6 +1,4 @@
-/*-------------------
 `define EXHIBITION    1
---------------------*/
 `define WORDSIZE      32
 
 
