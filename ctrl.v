@@ -1,6 +1,7 @@
 `include "defs.v"
 
 
+(* dont_touch = "true" *)
 module CTRL (
     input wire [6:0]    read_opcode,
     input wire [2:0]    read_funct,
@@ -9,7 +10,6 @@ module CTRL (
     output reg          load,
     output reg [2:0]    aluops,
     output reg [1:0]    extnrops,
-    output reg          memread,
     output reg          memwrite,
     output reg          regwrite,
     output reg [1:0]    storeops
@@ -21,7 +21,6 @@ module CTRL (
         load     <= 0; // lw
         aluops   <= 0;
         extnrops <= 0;
-        memread  <= 0; // lw
         memwrite <= 0; // S
         regwrite <= 0; // R, lw
         storeops <= 0; // S
@@ -31,7 +30,6 @@ module CTRL (
                 alusrc   <= 1;
                 extnrops <= `EXTNR_I;
                 load     <= 1;
-                memread  <= 1;
                 regwrite <= 1;
             end
             `OPCODE_I_I: begin
@@ -48,6 +46,7 @@ module CTRL (
                 /*
                  * STORE_{B,H,W} = FUNCT_S{B,H,W} + 1
                  */
+                (* full_case *)
                 case (read_funct)
                     `FUNCT_SB:
                         storeops <= `STORE_B;
@@ -66,6 +65,8 @@ module CTRL (
                 branch   <= 1;
                 aluops   <= `OPCODE_B_ALU;
                 extnrops <= `EXTNR_B;
+            end
+            default: begin
             end
         endcase
     end

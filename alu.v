@@ -1,6 +1,7 @@
 `include "defs.v"
 
 
+(* dont_touch = "true" *)
 module ALU (
     input wire [31:0] read1, read2,
     input wire [3:0] ops,
@@ -11,6 +12,8 @@ module ALU (
     assign zero = (out==0);
 
     always @(read1, read2, ops) begin
+        out <= 0;
+        (* full_case *)
         case (ops)
             `ALU_AND:
                 out <= read1 & read2;
@@ -49,6 +52,7 @@ endmodule
  * The first and second case statement should be
  * written in ctrl.v.
  */
+(* dont_touch = "true" *)
 module ALUCTRL (
     input wire [2:0]    ops,
     input wire [2:0]    funct3,
@@ -57,6 +61,7 @@ module ALUCTRL (
     );
 
     always @(ops, funct3, funct7_30) begin
+        out <= 0;
         case (ops)
             `OPCODE_I_ALU:
                 out <= `ALU_ADD;
@@ -65,6 +70,7 @@ module ALUCTRL (
             `OPCODE_B_ALU:
                 out <= `ALU_SUB;
             `OPCODE_R_ALU:
+                (* full_case *)
                 case (funct3)
                     `R_ADDSUB:
                         case (funct7_30)
@@ -94,6 +100,7 @@ module ALUCTRL (
                         endcase
                 endcase
             `OPCODE_I_I_ALU:
+                (* full_case *)
                 case (funct3)
                     `R_ADDSUB:
                         out <= `ALU_ADD;

@@ -7,11 +7,10 @@ module SIGNEXTNR (
     output reg [`WORDSIZE-1:0]    out
     );
 
-    always @(ops) begin
+    always @(ops, read) begin
+        out <= 0;
         out[`WORDSIZE-1] <= read[`WORDSIZE-1];
-        $display(read[`WORDSIZE-1]);
         if (read[`WORDSIZE-1]) begin
-            $display("fuck off");
             out[`WORDSIZE-2:`WORDSIZE-21] <= 20'b11111111111111111111;
         end
         case (ops)
@@ -26,7 +25,7 @@ module SIGNEXTNR (
             end 
             `EXTNR_I: begin
                 out[10:0] <= read[`WORDSIZE-2:`WORDSIZE-12];
-            end 
+            end
             `EXTNR_R: begin
                 out <= 0;
             end

@@ -1,23 +1,26 @@
 `include "defs.v"
 
 
+(* dont_touch = "true" *)
 module PC (
-    input wire [`WORDSIZE-1:0] addr,
-    output reg [`WORDSIZE-1:0] out,
-    input wire CLK,
-    input wire reset
+    input  wire [`WORDSIZE-1:0] addr,
+    output reg  [`WORDSIZE-1:0] out,
+    input  wire CLK,
+    input  wire reset
     );
 
     always @(posedge CLK) begin
-        out <= addr;
-    end
-
-    always @(posedge reset) begin
-        out <= 0;
+        if (reset) begin : rst
+            out[`WORDSIZE-1:0] <= 32'd0;
+        end
+        else begin
+            out[`WORDSIZE-1:0] <= addr;
+        end
     end
 endmodule
 
 
+(* dont_touch = "true" *)
 module INCPC (
     input wire [`WORDSIZE-1:0] addr,
     output wire [`WORDSIZE-1:0] out
@@ -27,6 +30,7 @@ module INCPC (
 endmodule
 
 
+(* dont_touch = "true" *)
 module BR_TGT (
     input wire [`WORDSIZE-1:0] addr1,
     input wire [`WORDSIZE-1:0] addr2,

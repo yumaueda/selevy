@@ -1,26 +1,26 @@
 `include "defs.v"
 
 
+(* dont_touch = "true" *)
 module RAM (
     input wire [31:0] addr, write_data,
-    input wire memread, memwrite,
+    input wire memwrite,
     input wire [1:0] storeops,
     output wire [31:0] read_data,
-    input wire CLK,
-    input wire reset
+    input wire CLK, reset
     );
 
-    reg [7:0] ram [`ROM_COL_MAX-1:0];
+    reg [7:0] ram [`RAM_COL_MAX-1:0];
 
     always @(posedge CLK) begin
-        if (memwrite)
+        if (reset) begin : rst
+            integer i;
+            for (i = 0; i < `RAM_COL_MAX; i = i + 1) begin
+                ram[i] <= 0;
+            end
+        end
+        else if (memwrite) begin
             do_store();
-    end
-
-    always @(posedge reset) begin : rst
-        integer i;
-        for (i = 0; i < `ROM_COL_MAX; i = i + 1) begin
-            ram[i] <= 0;
         end
     end
 
@@ -55,6 +55,7 @@ module RAM (
 
     task do_store;
     begin
+        (* full_case *)
         case (storeops)
             `STORE_B: store_byte();
             `STORE_H: store_half_word();

@@ -1,3 +1,6 @@
+/*-------------------
+`define EXHIBITION    1
+--------------------*/
 `define WORDSIZE      32
 
 
@@ -49,7 +52,8 @@
 
 
 `define REG_NUM       32
-`define ROM_COL_MAX   32
+`define RAM_COL_MAX   32
+`define ROM_COL_MAX   19
 
 
 `define STORE_B       2'b01
@@ -58,3 +62,6 @@
 
 
 `define DUMPFILE "selevy.vcd"
+
+`define RF_INIT  "rf.data"
+`define ROM_INIT "rom.data"
