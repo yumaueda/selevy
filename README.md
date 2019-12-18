@@ -1,6 +1,6 @@
 # Selevy
 
-Selevy is extremely simple implementation of sigle-cycle RISC-V core in Verilog. Currently only a subset of the RV32I is implemented. Most are under development.
+Selevy is extremely simple implementation of sigle-cycle RISC-V CPU in Verilog. Currently only a subset of the RV32I is implemented. Most are under development.
 
 ## Currently available instructions
 
@@ -9,11 +9,24 @@ Selevy is extremely simple implementation of sigle-cycle RISC-V core in Verilog.
 B
 
 - BEQ
+- BNE
+- BLT
+- BGE
+- BLTU
+- BGEU
 
 I
 
 - LW
 - ADDI
+- SLTI
+- SLTIU
+- XORI
+- ORI
+- ANDI
+- SLLI
+- SRLI
+- SRAI
 
 S
 
