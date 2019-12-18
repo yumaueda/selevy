@@ -1,4 +1,6 @@
+/*--------------------
 `define EXHIBITION    1
+--------------------*/
 `define WORDSIZE      32
 
 
@@ -12,6 +14,12 @@
 `define ALU_SRA       4'b0111
 `define ALU_OR        4'b1000
 `define ALU_AND       4'b1001
+`define ALU_SUB_S     4'b1010 // BLTU, BGEU
+
+
+`define ALU_BR_EQ     2'b00
+`define ALU_BR_LT     2'b01
+`define ALU_BR_GT     2'b10
 
 
 `define EXTNR_B       2'b00
@@ -20,6 +28,21 @@
 `define EXTNR_R       2'b11
 
 
+/*---------------------
+ * B
+---------------------*/
+`define FUNCT_EQ      3'b000
+`define FUNCT_NE      3'b001
+`define FUNCT_LT      3'b010
+`define FUNCT_GE      3'b011
+`define FUNCT_LTU     3'b100
+`define FUNCT_GEU     3'b101
+`define NO_BRANCH     3'b110
+
+
+/*---------------------
+ * S
+---------------------*/
 `define FUNCT_SB      3'b000
 `define FUNCT_SH      3'b001
 `define FUNCT_SW      3'b010
@@ -51,7 +74,7 @@
 
 `define REG_NUM       32
 `define RAM_COL_MAX   32
-`define ROM_COL_MAX   19
+`define ROM_COL_MAX   32
 
 
 `define STORE_B       2'b01

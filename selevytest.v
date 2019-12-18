@@ -47,8 +47,8 @@ module selevytest;
             $display("%d: %b", i*4, sel.selevy_rom.rom[i]);
         end
         --------------------*/
-        repeat (20*2)
+        repeat (21*2)
             #(CYC/2)  CLK = ~CLK;
-        #(CYC/2)    $finish;
+        #(CYC/2)$finish;
 end
 endmodule

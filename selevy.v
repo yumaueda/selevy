@@ -61,17 +61,18 @@ module selevy (
     wire ctrl_memwrite;
     wire [1:0] ctrl_storeops, ctrl_extnrops;
     wire [2:0] ctrl_aluops;
+    wire [2:0] ctrl_br_ops;
     CTRL ctrl(
         rom_out[6:0],
         rom_out[14:12],
-        ctrl_branch,
         ctrl_alusrc,
         ctrl_load,
         ctrl_aluops,
         ctrl_extnrops,
         ctrl_memwrite,
         rf_regwrite,
-        ctrl_storeops
+        ctrl_storeops,
+        ctrl_br_ops
     );
 
     SIGNEXTNR signextnr (
@@ -90,12 +91,12 @@ module selevy (
 
     wire [`WORDSIZE-1:0] alu_read2;
     wire [`WORDSIZE-1:0] alu_out;
-    wire alu_zero;
+    wire [1:0]           alu_br_ops;
     ALU alu (
         rf_out1, alu_read2,
         aluctrl_out,
         alu_out,
-        alu_zero
+        alu_br_ops
     );
 
     wire [`WORDSIZE-1:0] ram_read_data;
@@ -108,8 +109,18 @@ module selevy (
     );
 
     assign alu_read2 = ctrl_alusrc ? signextnr_out : rf_out2;
-    assign pc_addr = (ctrl_branch & alu_zero) ? br_tgt_target : incpc_out;
     assign rf_write_data = ctrl_load ? ram_read_data : alu_out;
+    /*----------
+    assign pc_addr = (ctrl_branch & alu_zero) ? br_tgt_target : incpc_out;
+    ----------*/
+
+    BRANCHCTRL bctrl (
+        ctrl_br_ops,
+        alu_br_ops,
+        incpc_out,
+        br_tgt_target,
+        pc_addr
+    );
 
     GPIO gpio (
         out_clk,

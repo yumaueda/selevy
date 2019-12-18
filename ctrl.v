@@ -2,27 +2,27 @@
 
 
 module CTRL (
-    input wire [6:0]    read_opcode,
-    input wire [2:0]    read_funct,
-    output reg          branch,
+    input  wire [6:0]   read_opcode,
+    input  wire [2:0]   read_funct,
     output reg          alusrc, 
     output reg          load,
-    output reg [2:0]    aluops,
-    output reg [1:0]    extnrops,
+    output reg  [2:0]   aluops,
+    output reg  [1:0]   extnrops,
     output reg          memwrite,
     output reg          regwrite,
-    output reg [1:0]    storeops
+    output reg  [1:0]   storeops,
+    output reg  [2:0]   branchops
     );
 
     always @(read_opcode, read_funct) begin
-        branch   <= 0; // beq
-        alusrc   <= 0; // lw, S
-        load     <= 0; // lw
-        aluops   <= 0;
+        alusrc <= 0; // lw, S
+        load <= 0; // lw
+        aluops <= 0;
         extnrops <= 0;
         memwrite <= 0; // S
         regwrite <= 0; // R, lw
         storeops <= 0; // S
+        branchops[2:0] <= `NO_BRANCH; // B
         case (read_opcode)
             `OPCODE_I: begin
                 aluops   <= `OPCODE_I_ALU;
@@ -61,11 +61,9 @@ module CTRL (
                 regwrite <= 1;
             end
             `OPCODE_B: begin
-                branch   <= 1;
                 aluops   <= `OPCODE_B_ALU;
                 extnrops <= `EXTNR_B;
-            end
-            default: begin
+                branchops <= read_funct;
             end
         endcase
     end

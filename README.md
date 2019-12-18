@@ -13,6 +13,7 @@ B
 I
 
 - LW
+- ADDI
 
 S
 

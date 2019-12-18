@@ -1,7 +1,7 @@
 `include "defs.v"
 
 
-module ROM(
+module ROM (
     /* `read_addr` must be multiple of 4 */
     input  wire [31:0] read_addr,
     output wire [31:0] out

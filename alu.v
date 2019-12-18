@@ -2,13 +2,25 @@
 
 
 module ALU (
-    input wire [31:0] read1, read2,
-    input wire [3:0] ops,
-    output reg [31:0] out,
-    output wire zero
+    input  wire [`WORDSIZE-1:0] read1, read2,
+    input  wire [3:0] ops,
+    output reg  [`WORDSIZE-1:0] out,
+    output wire [1:0] alu_br_ops
     );
 
-    assign zero = (out==0);
+    function [1:0] set_alu_br_ops;
+        input [31:0] out;
+        begin
+            if (out == 0)
+                set_alu_br_ops = `ALU_BR_EQ;
+            else if (out < 0)
+                set_alu_br_ops = `ALU_BR_LT;
+            else
+                set_alu_br_ops = `ALU_BR_GT;
+        end
+    endfunction
+
+    assign alu_br_ops = set_alu_br_ops(out);
 
     always @(read1, read2, ops) begin
         out <= 0;
@@ -42,6 +54,8 @@ module ALU (
                 out <= read1 | read2;
             `ALU_ADD:
                 out <= read1 + read2;
+            `ALU_SUB_S:
+                out <= $signed(read1) - $signed(read2);
         endcase
     end
 endmodule
@@ -66,7 +80,10 @@ module ALUCTRL (
             `OPCODE_S_ALU:
                 out <= `ALU_ADD;
             `OPCODE_B_ALU:
-                out <= `ALU_SUB;
+                if (funct3 == `FUNCT_LTU || funct3 == `FUNCT_GEU)
+                    out <= `ALU_SUB_S;
+                else
+                    out <= `ALU_SUB;
             `OPCODE_R_ALU:
                 (* full_case *)
                 case (funct3)
