@@ -5,7 +5,7 @@ module CTRL (
     input  wire [6:0]   read_opcode,
     input  wire [2:0]   read_funct,
     output reg          alusrc, 
-    output reg          load,
+    output reg  [2:0]   loadops,
     output reg  [2:0]   aluops,
     output reg  [1:0]   extnrops,
     output reg          memwrite,
@@ -16,7 +16,7 @@ module CTRL (
 
     always @(read_opcode, read_funct) begin
         alusrc <= 0; // lw, S
-        load <= 0; // lw
+        loadops <= `NO_LOAD; // I
         aluops <= 0;
         extnrops <= 0;
         memwrite <= 0; // S
@@ -28,7 +28,7 @@ module CTRL (
                 aluops   <= `OPCODE_I_ALU;
                 alusrc   <= 1;
                 extnrops <= `EXTNR_I;
-                load     <= 1;
+                loadops <= read_funct;
                 regwrite <= 1;
             end
             `OPCODE_I_I: begin

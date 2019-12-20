@@ -29,6 +29,17 @@
 
 
 /*---------------------
+ * I
+---------------------*/
+`define NO_LOAD       3'b011
+`define FUNCT_LB      3'b000
+`define FUNCT_LH      3'b001
+`define FUNCT_LW      3'b010
+`define FUNCT_LBU     3'b100
+`define FUNCT_LHU     3'b101
+
+
+/*---------------------
  * B
 ---------------------*/
 `define FUNCT_EQ      3'b000
@@ -84,5 +95,4 @@
 
 `define DUMPFILE "selevy.vcd"
 
-`define RF_INIT  "rf.data"
-`define ROM_INIT "rom.data"
+`define ROM_INIT "load.data"

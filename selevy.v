@@ -57,16 +57,16 @@ module selevy (
        out_clk, reset
     );
 
-    wire ctrl_branch, ctrl_alusrc, ctrl_load;
+    wire ctrl_branch, ctrl_alusrc;
     wire ctrl_memwrite;
     wire [1:0] ctrl_storeops, ctrl_extnrops;
-    wire [2:0] ctrl_aluops;
+    wire [2:0] ctrl_aluops, ctrl_loadops;
     wire [2:0] ctrl_br_ops;
     CTRL ctrl(
         rom_out[6:0],
         rom_out[14:12],
         ctrl_alusrc,
-        ctrl_load,
+        ctrl_loadops,
         ctrl_aluops,
         ctrl_extnrops,
         ctrl_memwrite,
@@ -102,6 +102,7 @@ module selevy (
     wire [`WORDSIZE-1:0] ram_read_data;
     RAM selevy_ram (
         alu_out, rf_out2,
+        ctrl_loadops,
         ctrl_memwrite,
         ctrl_storeops,
         ram_read_data,
@@ -109,10 +110,20 @@ module selevy (
     );
 
     assign alu_read2 = ctrl_alusrc ? signextnr_out : rf_out2;
-    assign rf_write_data = ctrl_load ? ram_read_data : alu_out;
-    /*----------
-    assign pc_addr = (ctrl_branch & alu_zero) ? br_tgt_target : incpc_out;
-    ----------*/
+
+    function [`WORDSIZE-1:0] set_rf_write_data;
+        input [2:0]           loadops;
+        input [`WORDSIZE-1:0] ram_out;
+        input [`WORDSIZE-1:0] alu;
+        begin
+            if (loadops == `NO_LOAD)
+                set_rf_write_data = alu;
+            else
+                set_rf_write_data = ram_out;
+        end
+    endfunction
+
+    assign rf_write_data = set_rf_write_data(ctrl_loadops, ram_read_data, alu_out);
 
     BRANCHCTRL bctrl (
         ctrl_br_ops,
