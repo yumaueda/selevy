@@ -1,6 +1,6 @@
 # Selevy
 
-Selevy is extremely simple implementation of a sigle-cycle RISC-V CPU in Verilog. Currently only a subset of the RV32IM is implemented.
+Selevy is extremely simple implementation of a sigle-cycle RISC-V CPU in Verilog. Currently only a subset of the RV32IM is implemented (Missing CSRs, csr*, e*, fence).
 
 ## License
 
