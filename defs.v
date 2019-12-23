@@ -1,20 +1,43 @@
+`define DUMPFILE      "selevy.vcd"
 /*--------------------
-`define EXHIBITION    1
+`define EXHIBITION
+`define ICARUS // Define this macro by using the D option of an iverilog command
 --------------------*/
+`define ROM_INIT      "rom.data"
 `define WORDSIZE      32
 
 
-`define ALU_ADD       4'b0000
-`define ALU_SUB       4'b0001
-`define ALU_SLL       4'b0010
-`define ALU_SLT       4'b0011
-`define ALU_SLTU      4'b0100
-`define ALU_XOR       4'b0101
-`define ALU_SRL       4'b0110
-`define ALU_SRA       4'b0111
-`define ALU_OR        4'b1000
-`define ALU_AND       4'b1001
-`define ALU_SUB_S     4'b1010 // BLTU, BGEU
+/*--------------------
+ * ALUCTRL -> ALU
+--------------------*/
+`define ALU_ADD       5'b00000 // ADD,  ADDI
+`define ALU_SUB       5'b00001 // SUB,  SUBI
+`define ALU_SLL       5'b00010 // SLL,  SLLI
+`define ALU_SLT       5'b00011 // SLT,  SLTI
+`define ALU_SLTU      5'b00100 // SLTU, SLTIU
+`define ALU_XOR       5'b00101 // XOR,  XORI
+`define ALU_SRL       5'b00110 // SRL,  SRLI
+`define ALU_SRA       5'b00111 // SRA,  SRAI
+`define ALU_OR        5'b01000 // OR,   ORI
+`define ALU_AND       5'b01001 // AND,  ANDI
+`define ALU_SUB_S     5'b01010 // BLTU, BGEU
+`define ALU_MUL       5'b01011 // MUL
+`define ALU_MULH      5'b01100 // MULH
+`define ALU_MULHSU    5'b01101 // MULHSU
+`define ALU_MULHU     5'b01110 // MULHU
+`define ALU_DIV       5'b01111 // DIV
+`define ALU_DIVU      5'b10000 // DIVU
+`define ALU_REM       5'b10001 // REM
+`define ALU_REMU      5'b10010 // REMU
+
+`define F3_ADDSUBMUL  3'b000
+`define F3_SLLMULH    3'b001
+`define F3_SLTMULHSU  3'b010
+`define F3_SLTUMULHU  3'b011
+`define F3_XORDIV     3'b100
+`define F3_SRLSRADIVU 3'b101
+`define F3_ORREM      3'b110
+`define F3_ANDREMU    3'b111
 
 
 `define ALU_BR_EQ     2'b00
@@ -73,14 +96,6 @@
 `define OPCODE_S_ALU      3'b100
 
 
-`define R_ADDSUB      3'b000
-`define R_SLL         3'b001
-`define R_SLT         3'b010
-`define R_SLTU        3'b011
-`define R_XOR         3'b100
-`define R_SRLSRA      3'b101
-`define R_OR          3'b110
-`define R_AND         3'b111
 
 
 `define REG_NUM       32
@@ -91,8 +106,3 @@
 `define STORE_B       2'b01
 `define STORE_H       2'b10
 `define STORE_W       2'b11
-
-
-`define DUMPFILE "selevy.vcd"
-
-`define ROM_INIT "load.data"

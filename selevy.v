@@ -2,20 +2,20 @@
 
 
 module selevy (
-    input wire CLK,
-    input wire reset,
+    input  wire       CLK,
+    input  wire       reset,
     output wire [3:0] out_ja1,
-    output wire out_clk
+    output wire       out_clk
     );
 
     `ifdef EXHIBITION
-        wire out_clk;
-        MMCM mmcm(
-            CLK,
-            out_clk
-        );
+    wire out_clk;
+    MMCM mmcm(
+        CLK,
+        out_clk
+    );
     `else
-        assign out_clk = CLK;
+    assign out_clk = CLK;
     `endif
 
     wire [`WORDSIZE-1:0] pc_addr;
@@ -46,7 +46,7 @@ module selevy (
     );
 
     wire [`WORDSIZE-1:0] rf_write_data;
-    wire rf_regwrite;
+    wire                 rf_regwrite;
     wire [`WORDSIZE-1:0] rf_out1, rf_out2;
     REGFILE selevy_regfile (
        rom_out[19:15], rom_out[24:20], rom_out[11:7],
@@ -54,7 +54,7 @@ module selevy (
        rf_regwrite,
        rf_out1,
        rf_out2,
-       out_clk, reset
+       out_clk,reset
     );
 
     wire ctrl_branch, ctrl_alusrc;
@@ -81,11 +81,11 @@ module selevy (
         signextnr_out
     );
 
-    wire [3:0] aluctrl_out;
+    wire [4:0] aluctrl_out;
     ALUCTRL aluctrl (
         ctrl_aluops,
         rom_out[14:12],
-        rom_out[30],
+        rom_out[31:25],
         aluctrl_out
     );
 

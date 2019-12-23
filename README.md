@@ -1,6 +1,6 @@
 # Selevy
 
-Selevy is extremely simple implementation of sigle-cycle RISC-V CPU in Verilog. Currently only a subset of the RV32I is implemented.
+Selevy is extremely simple implementation of a sigle-cycle RISC-V CPU in Verilog. Currently only a subset of the RV32IM is implemented.
 
 ## License
 
@@ -10,48 +10,51 @@ This program follows [BSD 2-clause License](./LICENSE.txt).
 
 ### RV32I
 
-B
+| Type | Instruction |
+| ---- | ----------- |
+| B    | BEQ         |
+| B    | BNE         |
+| B    | BLT         |
+| B    | BGE         |
+| B    | BLTU        |
+| B    | BGEU        |
+| I    | LB          |
+| I    | LW          |
+| I    | LBU         |
+| I    | LHU         |
+| I    | ADDI        |
+| I    | SLTI        |
+| I    | SLTIU       |
+| I    | XORI        |
+| I    | ORI         |
+| I    | ANDI        |
+| I    | SLLI        |
+| I    | SRLI        |
+| I    | SRAI        |
+| S    | SB          |
+| S    | SH          |
+| S    | SW          |
+| R    | ADD         |
+| R    | SUB         |
+| R    | SLL         |
+| R    | SLT         |
+| R    | SLTU        |
+| R    | XOR         |
+| R    | SRL         |
+| R    | SRA         |
+| R    | OR          |
+| R    | AND         |
+| R    | XOR         |
 
-- BEQ
-- BNE
-- BLT
-- BGE
-- BLTU
-- BGEU
+### RV32M
 
-I
-
-- LB
-- LH
-- LW
-- LBU
-- LHU
-- ADDI
-- SLTI
-- SLTIU
-- XORI
-- ORI
-- ANDI
-- SLLI
-- SRLI
-- SRAI
-
-S
-
-- SB
-- SH
-- SW
-
-R
-
-- ADD
-- SUB
-- SLL
-- SLT
-- SLTU
-- XOR
-- SRL
-- SRA
-- OR
-- AND
-- XOR
+| Type | Instruction |
+| ---- | ----------- |
+| R    | MUL         |
+| R    | MULH        |
+| R    | MULHSU      |
+| R    | MULHU       |
+| R    | DIV         |
+| R    | DIVU        |
+| R    | REM         |
+| R    | REMU        |
