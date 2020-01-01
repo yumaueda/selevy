@@ -18,11 +18,11 @@ module selevy (
     assign out_clk = CLK;
     `endif
 
-    wire [`WORDSIZE-1:0] pc_addr;
-    wire [`WORDSIZE-1:0] pc_out;
-    wire [`WORDSIZE-1:0] incpc_out;
-    wire [`WORDSIZE-1:0] signextnr_out;
-    wire [`WORDSIZE-1:0] br_tgt_target;
+    wire [`MXLEN-1:0] pc_addr;
+    wire [`MXLEN-1:0] pc_out;
+    wire [`MXLEN-1:0] incpc_out;
+    wire [`MXLEN-1:0] signextnr_out;
+    wire [`MXLEN-1:0] br_tgt_target;
     PC pc (
         pc_addr,
         pc_out,
@@ -39,15 +39,15 @@ module selevy (
         br_tgt_target
     );
 
-    wire [`WORDSIZE-1:0] rom_out;
+    wire [`MXLEN-1:0] rom_out;
     ROM selevy_rom (
         pc_out,
         rom_out
     );
 
-    wire [`WORDSIZE-1:0] rf_write_data;
+    wire [`MXLEN-1:0] rf_write_data;
     wire                 rf_regwrite;
-    wire [`WORDSIZE-1:0] rf_out1, rf_out2;
+    wire [`MXLEN-1:0] rf_out1, rf_out2;
     REGFILE selevy_regfile (
        rom_out[19:15], rom_out[24:20], rom_out[11:7],
        rf_write_data,
@@ -89,8 +89,8 @@ module selevy (
         aluctrl_out
     );
 
-    wire [`WORDSIZE-1:0] alu_read2;
-    wire [`WORDSIZE-1:0] alu_out;
+    wire [`MXLEN-1:0] alu_read2;
+    wire [`MXLEN-1:0] alu_out;
     wire [1:0]           alu_br_ops;
     ALU alu (
         rf_out1, alu_read2,
@@ -99,7 +99,7 @@ module selevy (
         alu_br_ops
     );
 
-    wire [`WORDSIZE-1:0] ram_read_data;
+    wire [`MXLEN-1:0] ram_read_data;
     RAM selevy_ram (
         alu_out, rf_out2,
         ctrl_loadops,
@@ -111,10 +111,10 @@ module selevy (
 
     assign alu_read2 = ctrl_alusrc ? signextnr_out : rf_out2;
 
-    function [`WORDSIZE-1:0] set_rf_write_data;
+    function [`MXLEN-1:0] set_rf_write_data;
         input [2:0]           loadops;
-        input [`WORDSIZE-1:0] ram_out;
-        input [`WORDSIZE-1:0] alu;
+        input [`MXLEN-1:0] ram_out;
+        input [`MXLEN-1:0] alu;
         begin
             if (loadops == `NO_LOAD)
                 set_rf_write_data = alu;

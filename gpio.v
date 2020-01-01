@@ -1,7 +1,7 @@
 module GPIO (
     input wire  CLK,
-    input wire  [`WORDSIZE-1:0] alu_out,
-    input wire  [`WORDSIZE-1:0] ram_read_data,
+    input wire  [`MXLEN-1:0] alu_out,
+    input wire  [`MXLEN-1:0] ram_read_data,
     output wire [3:0] out_ja1
     );
 

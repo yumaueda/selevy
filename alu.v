@@ -2,9 +2,9 @@
 
 
 module ALU (
-    input  wire [`WORDSIZE-1:0] read1, read2,
+    input  wire [`MXLEN-1:0] read1, read2,
     input  wire [4:0] ops,
-    output reg  [`WORDSIZE-1:0] out,
+    output reg  [`MXLEN-1:0] out,
     output wire [1:0] alu_br_ops
     );
 
@@ -43,15 +43,15 @@ module ALU (
             `ALU_MUL:       out <= $signed(read1) * $signed(read2);
             `ALU_MULH:   begin
                 out <= $signed(read1) * $signed(read2);
-                out[(`WORDSIZE/2)-1:0] <= 0;
+                out[(`MXLEN/2)-1:0] <= 0;
             end
             `ALU_MULHSU: begin
                 out <= $signed(read1) * read2;
-                out[(`WORDSIZE/2)-1:0] <= 0;
+                out[(`MXLEN/2)-1:0] <= 0;
             end
             `ALU_MULHU:  begin
                 out <= read1 / read2;
-                out[(`WORDSIZE/2)-1:0] <= 0;
+                out[(`MXLEN/2)-1:0] <= 0;
             end
             `ALU_DIV:       out <= $signed(read1) / $signed(read2);
             `ALU_DIVU:      out <= read1 / read2;
@@ -70,6 +70,8 @@ module ALUCTRL (
     );
 
     always @(ops, funct3, funct7) begin
+        out <= 0;
+        (* full_case *)
         case (ops)
             `OPCODE_I_ALU:
                 out <= `ALU_ADD;

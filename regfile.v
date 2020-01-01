@@ -10,7 +10,7 @@ module REGFILE (
     input wire CLK, reset
     );
 
-    reg [`WORDSIZE-1:0] rf [`REG_NUM-1:0];
+    reg [`MXLEN-1:0] rf [`REG_NUM-1:0];
 
     assign out1 = rf[read1];
     assign out2 = rf[read2];
@@ -18,7 +18,7 @@ module REGFILE (
     always @(posedge CLK) begin
         if (reset) begin : rst
             integer i;
-            for (i = 0; i < `WORDSIZE; i = i + 1) begin
+            for (i = 0; i < `MXLEN; i = i + 1) begin
                 rf[i] <= 0;
             end
         end

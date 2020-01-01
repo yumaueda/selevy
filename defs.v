@@ -3,8 +3,8 @@
 `define EXHIBITION
 `define ICARUS // Define this macro by using the D option of an iverilog command
 --------------------*/
-`define ROM_INIT      "rom.data"
-`define WORDSIZE      32
+`define ROM_INIT      "test/rom.data"
+`define MXLEN      32
 
 
 /*--------------------
@@ -87,6 +87,7 @@
 `define OPCODE_I_I    7'b0010011
 `define OPCODE_R      7'b0110011
 `define OPCODE_B      7'b1100011
+`define OPCODE_SYSTEM 7'b1110011
 
 
 `define OPCODE_B_ALU      3'b000

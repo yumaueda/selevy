@@ -4,9 +4,9 @@
 module BRANCHCTRL (
     input  wire [2:0] ctrl_br_ops,
     input  wire [1:0] alu_br_ops,
-    input  wire [`WORDSIZE-1:0] incpc_out,
-    input  wire [`WORDSIZE-1:0] br_tgt_target,
-    output wire [`WORDSIZE-1:0] pc_addr
+    input  wire [`MXLEN-1:0] incpc_out,
+    input  wire [`MXLEN-1:0] br_tgt_target,
+    output wire [`MXLEN-1:0] pc_addr
     );
 
     assign pc_addr = set_pc_addr(ctrl_br_ops,
@@ -14,11 +14,11 @@ module BRANCHCTRL (
                                  incpc_out,
                                  br_tgt_target);
 
-    function [`WORDSIZE-1:0] set_pc_addr;
+    function [`MXLEN-1:0] set_pc_addr;
         input [2:0] ctrl_ops;
         input [1:0] alu_ops;
-        input [`WORDSIZE-1:0] incpc;
-        input [`WORDSIZE-1:0] br_target;
+        input [`MXLEN-1:0] incpc;
+        input [`MXLEN-1:0] br_target;
         begin
             (* full_case *)
             case (ctrl_ops)

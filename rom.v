@@ -7,7 +7,7 @@ module ROM (
     output wire [31:0] out
     );
 
-    reg [`WORDSIZE-1:0] rom [`ROM_COL_MAX-1:0];
+    reg [`MXLEN-1:0] rom [`ROM_COL_MAX-1:0];
 
     assign out = rom[read_addr/4];
 

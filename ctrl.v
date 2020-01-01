@@ -3,7 +3,7 @@
 
 module CTRL (
     input  wire [6:0]   read_opcode,
-    input  wire [2:0]   read_funct,
+    input  wire [2:0]   read_funct3,
     output reg          alusrc, 
     output reg  [2:0]   loadops,
     output reg  [2:0]   aluops,
@@ -14,7 +14,7 @@ module CTRL (
     output reg  [2:0]   branchops
     );
 
-    always @(read_opcode, read_funct) begin
+    always @(read_opcode, read_funct3) begin
         alusrc <= 0; // lw, S
         loadops <= `NO_LOAD; // I
         aluops <= 0;
@@ -28,7 +28,7 @@ module CTRL (
                 aluops   <= `OPCODE_I_ALU;
                 alusrc   <= 1;
                 extnrops <= `EXTNR_I;
-                loadops <= read_funct;
+                loadops <= read_funct3;
                 regwrite <= 1;
             end
             `OPCODE_I_I: begin
@@ -46,7 +46,7 @@ module CTRL (
                  * STORE_{B,H,W} = FUNCT_S{B,H,W} + 1
                  */
                 (* full_case *)
-                case (read_funct)
+                case (read_funct3)
                     `FUNCT_SB:
                         storeops <= `STORE_B;
                     `FUNCT_SH:
@@ -63,7 +63,9 @@ module CTRL (
             `OPCODE_B: begin
                 aluops   <= `OPCODE_B_ALU;
                 extnrops <= `EXTNR_B;
-                branchops <= read_funct;
+                branchops <= read_funct3;
+            end
+            `OPCODE_SYSTEM: begin
             end
         endcase
     end

@@ -24,32 +24,32 @@ module RAM (
         end
     end
 
-    function [`WORDSIZE-1:0] signextend_h;
+    function [`MXLEN-1:0] signextend_h;
         input [15:0] in;
         begin
             signextend_h[15:0] = in;
             if (in[15])
-                signextend_h[`WORDSIZE-1:16] = 16'b1111111111111111;
+                signextend_h[`MXLEN-1:16] = 16'b1111111111111111;
             else
-                signextend_h[`WORDSIZE-1:16] = 16'b0;
+                signextend_h[`MXLEN-1:16] = 16'b0;
         end
     endfunction
 
-    function [`WORDSIZE-1:0] signextend_b;
+    function [`MXLEN-1:0] signextend_b;
         input [7:0] in;
         begin
             signextend_b[7:0] = in[7:0];
             if (in[7]) begin
-                signextend_b[`WORDSIZE-1:8] = 24'b111111111111111111111111;
+                signextend_b[`MXLEN-1:8] = 24'b111111111111111111111111;
             end
             else
-                signextend_b[`WORDSIZE-1:8] = 24'b0;
+                signextend_b[`MXLEN-1:8] = 24'b0;
         end
     endfunction
 
-    function [`WORDSIZE-1:0] set_read_data;
+    function [`MXLEN-1:0] set_read_data;
         input [2:0] loadops;
-        input [`WORDSIZE-1:0] address;
+        input [`MXLEN-1:0] address;
         begin
             if (loadops == `NO_LOAD)
                 set_read_data = 32'b0;
