@@ -6,8 +6,10 @@ module ALU
     input  wire [`MXLEN-1:0] read1,
     input  wire [`MXLEN-1:0] read2_reg,
     input  wire [`MXLEN-1:0] read2_imm,
+    input  wire [`MXLEN-1:0] read2_csr,
     input  wire [ 4:0]       alu_ops,
     input  wire              src_imm,
+    input  wire              csr_read,
     output wire [`MXLEN-1:0] out,
     output wire [ 1:0]       val_eval
 );
@@ -15,7 +17,23 @@ module ALU
 
 wire [`MXLEN-1:0] read2;
 
-assign read2 = (src_imm == 1'b1)? read2_imm : read2_reg;
+function set_read2;
+input imm;
+input csr;
+begin
+    if (csr == 1'b1) begin
+        set_read2 = read2_csr;
+    end
+    else if (imm == 1'b1) begin
+        set_read2 = read2_imm;
+    end
+    else begin
+        set_read2 = read2_reg;
+    end
+end
+endfunction
+
+assign read2 = set_read2(src_imm, csr_read);
 
 function [1:0] set_val_eval;
 input [`MXLEN-1:0] out;
@@ -34,14 +52,14 @@ endfunction
 
 assign val_eval = set_val_eval(out);
 
-function [ 1:0] set_out;
+function [`MXLEN-1:0] set_out;
 input [`MXLEN-1:0] r1;
 input [`MXLEN-1:0] r2;
 input [ 4:0]       ops;
 begin
     case (ops)
         `ALU_AND: begin
-            set_out = r1& r2;
+            set_out = r1 & r2;
         end
         `ALU_SUB: begin
             set_out = r1 - r2;
@@ -106,6 +124,9 @@ begin
         end
         `ALU_REMU: begin
             set_out = r1 % r2;
+        end
+        `ALU_CSRRW: begin
+            set_out = 32'd0 + r2;
         end
     endcase
 end

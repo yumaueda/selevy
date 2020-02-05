@@ -17,7 +17,7 @@ module REGFILE
     output wire [`MXLEN-1:0] r_data2
 );
 
-reg  [`MXLEN-1:0] regfile [`REG_NUM-1:0];
+reg  [`MXLEN-1:0] regfile [REG_NUM-1:0];
 
 always @(posedge CLK) begin
     if (reg_write == 1'b1 && exception == 1'b0) begin
@@ -27,7 +27,7 @@ always @(posedge CLK) begin
     end
 end
 
-assign r_data1 = (r_addr1 != 5'd0)? regfile[r_addr1] : {`MXLEN-1{1'b0}};
-assign r_data2 = (r_addr2 != 5'd0)? regfile[r_addr2] : {`MXLEN-1{1'b0}};
+assign r_data1 = (r_addr1 != 5'd0)? regfile[r_addr1] : {`MXLEN{1'b0}};
+assign r_data2 = (r_addr2 != 5'd0)? regfile[r_addr2] : {`MXLEN{1'b0}};
 
 endmodule
