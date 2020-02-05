@@ -110,17 +110,17 @@ input [ 2:0]       ops;
 begin
     case (ops)
         F3_SB: begin
-            ram[w_addr]   <= data[ 7:0];
+            ram[w_addr+0] <= data[ 7:0];
         end
         F3_SH: begin
-            ram[w_addr+1] <= data[15:8];
-            ram[w_addr]   <= data[ 7:0];
+            ram[w_addr+0] <= data[15:8];
+            ram[w_addr+1] <= data[ 7:0];
         end
         F3_SW: begin
-            ram[w_addr+3] <= data[31:24];
-            ram[w_addr+2] <= data[23:16];
-            ram[w_addr+1] <= data[15:8];
-            ram[w_addr+0] <= data[ 7:0];
+            ram[w_addr+0] <= data[31:24];
+            ram[w_addr+1] <= data[23:16];
+            ram[w_addr+2] <= data[15:8];
+            ram[w_addr+3] <= data[ 7:0];
         end
     endcase
 end

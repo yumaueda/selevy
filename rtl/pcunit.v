@@ -55,56 +55,56 @@ begin
         case (ops)
             `F3_BEQ: begin
                 if (eval == `ALU_BR_EQ) begin
-                    set_next_pc_val = pc + imm;
+                    set_next_pc_val = pc_current + imm;
                 end
                 else begin
-                    set_next_pc_val = pc + 3'd4;
+                    set_next_pc_val = pc_current + 3'd4;
                 end
             end
             `F3_BNE: begin
                 if (eval != `ALU_BR_EQ) begin
-                    set_next_pc_val = pc + imm;
+                    set_next_pc_val = pc_current + imm;
                 end
                 else begin
-                    set_next_pc_val = pc + 3'd4;
+                    set_next_pc_val = pc_current + 3'd4;
                 end
             end
             `F3_BLT: begin
                 if (eval == `ALU_BR_LT) begin
-                    set_next_pc_val = pc + imm;
+                    set_next_pc_val = pc_current + imm;
                 end
                 else begin
-                    set_next_pc_val = pc + 3'd4;
+                    set_next_pc_val = pc_current + 3'd4;
                 end
             end
             `F3_BGE: begin
                 if (eval==`ALU_BR_GT || eval==`ALU_BR_EQ) begin
-                    set_next_pc_val = pc + imm;
+                    set_next_pc_val = pc_current + imm;
                 end
                 else begin
-                    set_next_pc_val = pc + 3'd4;
+                    set_next_pc_val = pc_current + 3'd4;
                 end
             end
             `F3_BLTU: begin
                 if (eval == `ALU_BR_LT) begin
-                    set_next_pc_val = pc + imm;
+                    set_next_pc_val = pc_current + imm;
                 end
                 else begin
-                    set_next_pc_val = pc + 3'd4;
+                    set_next_pc_val = pc_current + 3'd4;
                 end
             end
             `F3_BGEU: begin
                 if (eval==`ALU_BR_GT || eval==`ALU_BR_EQ) begin
-                    set_next_pc_val = pc + imm;
+                    set_next_pc_val = pc_current + imm;
                 end
                 else begin
-                    set_next_pc_val = pc + 3'd4;
+                    set_next_pc_val = pc_current + 3'd4;
                 end
             end
         endcase
     end
     else begin
-        set_next_pc_val = pc + 3'd4;
+        set_next_pc_val = pc_current + 3'd4;
     end
 end
 endfunction

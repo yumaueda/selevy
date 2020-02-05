@@ -198,6 +198,26 @@ always @(instr) begin
                         end
                     endcase
                 end
+                F3_SLTMULHSU: begin
+                    case (funct7[0])
+                        1'b0: begin
+                            alu_ops <= `ALU_SLT;
+                        end
+                        1'b1: begin
+                            alu_ops <= `ALU_MULHSU;
+                        end
+                    endcase
+                end
+                F3_SLTUMULHU: begin
+                    case (funct7[0])
+                        1'b0: begin
+                            alu_ops <= `ALU_SLTU;
+                        end
+                        1'b1: begin
+                            alu_ops <= `ALU_MULHSU;
+                        end
+                    endcase
+                end
                 F3_XORDIV: begin
                     case (funct7[0])
                         1'b0: begin
@@ -222,10 +242,24 @@ always @(instr) begin
                     endcase
                 end
                 F3_ORREM: begin
-                    alu_ops <= `ALU_OR;
+                    case (funct7[0])
+                        1'b0: begin
+                            alu_ops <= `ALU_OR;
+                        end
+                        1'b1: begin
+                            alu_ops <= `ALU_REM;
+                        end
+                    endcase
                 end
                 F3_ANDREMU: begin
-                    alu_ops <= `ALU_AND;
+                    case (funct7[0])
+                        1'b0: begin
+                            alu_ops <= `ALU_AND;
+                        end
+                        1'b1: begin
+                            alu_ops <= `ALU_REMU;
+                        end
+                    endcase
                 end
             endcase
             src_imm                   <= 1'b0;

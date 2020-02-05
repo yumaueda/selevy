@@ -6,6 +6,7 @@ module ROM
 #(
     parameter BOOTROM     = "rom.data",
     parameter ROM_COL_MAX = 32
+)
 (
     input  wire [31:0] addr,
     output wire [31:0] data

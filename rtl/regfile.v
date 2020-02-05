@@ -3,7 +3,7 @@
 
 module REGFILE
 #(
-    parameter   [5:0]        REG_NUM = 6'd32
+    parameter                REG_NUM = 32
 )
 (
     input  wire              CLK,

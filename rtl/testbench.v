@@ -2,7 +2,7 @@
 `timescale 1ns/100ps
 
 
-module selevytest;
+module testbench;
 
 parameter CLK_PERIOD_h = 5;
 parameter DUMPFILE     = "wave.vcd";
@@ -10,7 +10,7 @@ parameter DUMPFILE     = "wave.vcd";
 reg  CLK, reset;
 wire [3:0] gout;
 
-selevy core (
+selevy selevy (
     CLK,
     reset,
     gout
@@ -18,7 +18,7 @@ selevy core (
 
 initial begin
     $dumpfile(DUMPFILE);
-    $dumpvars(0, selevytest);
+    $dumpvars(0, testbench);
 
     CLK = 0; reset = 0;
 

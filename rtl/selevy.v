@@ -115,7 +115,7 @@ ALU alu (
     csr_r_data,
     alu_ops,
     src_imm,
-    cr_read,
+    csr_read,
     alu_out,
     val_eval
 );

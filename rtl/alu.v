@@ -17,23 +17,30 @@ module ALU
 
 wire [`MXLEN-1:0] read2;
 
-function set_read2;
-input imm;
-input csr;
+function [`MXLEN-1:0] set_read2;
+input              imm;
+input              csr;
+input [`MXLEN-1:0] r2_reg;
+input [`MXLEN-1:0] r2_imm;
+input [`MXLEN-1:0] r2_csr;
 begin
     if (csr == 1'b1) begin
-        set_read2 = read2_csr;
+        set_read2 = r2_csr;
     end
     else if (imm == 1'b1) begin
-        set_read2 = read2_imm;
+        set_read2 = r2_imm;
     end
     else begin
-        set_read2 = read2_reg;
+        set_read2 = r2_reg;
     end
 end
 endfunction
 
-assign read2 = set_read2(src_imm, csr_read);
+assign read2 = set_read2(src_imm,
+                         csr_read,
+                         read2_reg,
+                         read2_imm,
+                         read2_csr);
 
 function [1:0] set_val_eval;
 input [`MXLEN-1:0] out;
