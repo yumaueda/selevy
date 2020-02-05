@@ -22,9 +22,19 @@ module RAM
     input  wire [ 2:0]       load_ops,
     input  wire              store,
     input  wire [ 2:0]       store_ops,
-    output wire [`MXLEN-1:0] r_data
-
+    input  wire              exception,
+    output wire [`MXLEN-1:0] r_data,
+    output wire              load_misaligned,
+    output wire              store_misaligned
 );
+
+// The following exceptions never happen in the current implementation
+//
+// + load_misaligned
+// + store_misaligned
+
+assign load_misaligned  = 0;
+assign store_misaligned = 0;
 
 reg [ 7:0] ram [RAM_COL_MAX-1:0];
 
@@ -117,8 +127,10 @@ end
 endtask
 
 always @(posedge CLK) begin
-    if (store) begin
-        do_store(addr, w_data, store_ops);
+    if (exception != 1'b1) begin
+        if (store) begin
+            do_store(addr, w_data, store_ops);
+        end
     end
 end
 
