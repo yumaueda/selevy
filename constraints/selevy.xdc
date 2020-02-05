@@ -1,0 +1,15 @@
+create_clock -period 10.000 -name CLK -waveform {0.000 5.000} -add [get_ports CLK]
+
+set_property IOSTANDARD LVCMOS33 [get_ports CLK]
+set_property IOSTANDARD LVCMOS33 [get_ports RST]
+set_property IOSTANDARD LVCMOS33 [get_ports {out_ja1[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {out_ja1[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {out_ja1[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {out_ja1[0]}]
+
+set_property PACKAGE_PIN E3 [get_ports CLK]
+set_property PACKAGE_PIN C9 [get_ports RST]
+set_property PACKAGE_PIN G6 [get_ports {out_ja1[0]}]
+set_property PACKAGE_PIN G3 [get_ports {out_ja1[1]}]
+set_property PACKAGE_PIN J3 [get_ports {out_ja1[2]}]
+set_property PACKAGE_PIN K1 [get_ports {out_ja1[3]}]
