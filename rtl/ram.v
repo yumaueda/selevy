@@ -25,7 +25,9 @@ module RAM
     input  wire              exception,
     output wire [`MXLEN-1:0] r_data,
     output wire              load_misaligned,
-    output wire              store_misaligned
+    output wire              store_misaligned,
+    output wire              uart_te,
+    output wire [7:0]        uart_txd
 );
 
 // The following exceptions never happen in the current implementation
@@ -37,6 +39,9 @@ assign load_misaligned  = 0;
 assign store_misaligned = 0;
 
 reg [ 7:0] ram [RAM_COL_MAX-1:0];
+
+assign uart_te  = ram[1022][0];
+assign uart_txd = ram[1023];
 
 function [`MXLEN-1:0] signextend_b;
 input    [ 7:0] in;

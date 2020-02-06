@@ -21,9 +21,9 @@ wire [ 2:0]       load_ops;     // decoder_to_ram
 wire              store;        // decoder_to_ram
 wire [ 2:0]       store_ops;    // decoder_to_ram
 wire              reg_write;    // decoder_to_regfile
-wire              mret;         // decoder_to_
-wire              csr_read;
-wire              csr_write;
+wire              mret;         // decoder_to_{csr, pcunit}
+wire              csr_read;     // decoder_to_{alu, csr}
+wire              csr_write;    // decoder_to_csr
 wire              illegal_i;    // decoder_to_traphdlr
 wire              ecall_m;      // decoder_to_traphdlr
 
@@ -31,6 +31,8 @@ wire [ 1:0]       val_eval;     // alu_to_pcunit
 
 wire              l_misaligned; // ram_to_traphdlr
 wire              s_misaligned; // ram_to_traphdlr
+wire              uart_te;      // ram_to_uart_top_ctrl
+wire [ 7:0]       uart_txd;     // ram_to_uart_top_ctrl
 
 wire [`MXLEN-1:0] instr;        // rom_to_{decoder, regfile}
 
@@ -132,7 +134,9 @@ RAM ram (
     exception,
     ram_r_data,
     l_misaligned,
-    s_misaligned
+    s_misaligned,
+    uart_te,
+    uart_txd
 );
 
 GPIO gpio (
