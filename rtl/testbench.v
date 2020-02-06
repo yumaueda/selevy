@@ -7,13 +7,16 @@ module testbench;
 parameter CLK_PERIOD_h = 5;
 parameter DUMPFILE     = "wave.vcd";
 
-reg  CLK, reset;
-wire [3:0] gout;
+reg         CLK;
+reg         reset;
+wire [ 3:0] gout;
+wire        TXD;
 
 selevy selevy (
     CLK,
     reset,
-    gout
+    gout,
+    TXD
 );
 
 initial begin

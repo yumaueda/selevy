@@ -3,9 +3,10 @@
 
 module selevy 
 (
-    input  wire       CLK,
-    input  wire       RST,
-    output wire [3:0] out_ja1
+    input  wire        CLK,
+    input  wire        RST,
+    output wire [ 3:0] out_ja1,
+    output wire        TXD
 );
 
 wire [`MXLEN-1:0] pc_val;       // pcunit_to_rom
@@ -167,6 +168,13 @@ CSR csr (
     instr,
     alu_out, // ram_addr, w_data
     csr_r_data
+);
+
+UART_TOP_CTRL uart_top_ctrl (
+    CLK,
+    uart_te,
+    uart_txd,
+    TXD
 );
 
 endmodule
